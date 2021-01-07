@@ -4,10 +4,11 @@ Because your neighbors keep defeating you in the holiday house decorating contes
 
 Examples
 
-turn on 0,0 through 999,999 would turn on (or leave on) every light.
-toggle 0,0 through 999,0 would toggle the first line of 1000 lights, turning off the ones that were on, and turning on the ones that were off.
-turn off 499,499 through 500,500 would turn off (or leave off) the middle four lights.
-Instructions
+* turn on 0,0 through 999,999 would turn on (or leave on) every light.
+* toggle 0,0 through 999,0 would toggle the first line of 1000 lights, turning off the ones that were on, and turning on the ones that were off.
+* turn off 499,499 through 500,500 would turn off (or leave off) the middle four lights.
+
+## Instructions
 
 turn on 887,9 through 959,629
 turn on 454,398 through 844,448
@@ -20,7 +21,7 @@ toggle 720,196 through 897,994
 toggle 831,394 through 904,860
 After following the instructions, how many lights are lit?
 
-Part Two
+## Part Two
 
 You just finish implementing your winning light pattern when you realize you mistranslated Santa’s message from Ancient Nordic Elvish. The light grid you bought actually has individual brightness controls; each light can have a brightness of zero or more. The lights all start at zero.
 
@@ -31,5 +32,5 @@ What is the total brightness of all lights combined after following Santa’s in
 
 For example:
 
-turn on 0,0 through 0,0 would increase the total brightness by 1.
-toggle 0,0 through 999,999 would increase the total brightness by 2000000.
+* turn on 0,0 through 0,0 would increase the total brightness by 1.
+* toggle 0,0 through 999,999 would increase the total brightness by 2000000.
