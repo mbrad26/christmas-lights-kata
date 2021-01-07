@@ -10,4 +10,14 @@ describe('Light', () => {
 
     expect(light.state).toEqual('OFF');
   });
+
+  describe('#turnON', () => {
+    it('turns the light on', () => {
+      const light = new Light();
+
+      light.turnON();
+
+      expect(light.state).toEqual('ON');
+    });
+  });
 });
