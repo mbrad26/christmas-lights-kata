@@ -16,12 +16,6 @@ describe('LightsGrid', () => {
   });
 
   describe('#turnONLights', () => {
-    const LightON = Light.mockImplementation(() => ({
-      state: 'ON',
-      turnON: jest.fn(),
-      turnOFF: jest.fn(),
-    }));
-
     const initialGrid = [
       [new Light(), new Light(), new Light(), new Light(), new Light()],
       [new Light(), new Light(), new Light(), new Light(), new Light()],
@@ -29,8 +23,13 @@ describe('LightsGrid', () => {
       [new Light(), new Light(), new Light(), new Light(), new Light()],
       [new Light(), new Light(), new Light(), new Light(), new Light()]
     ];
-
+    
     it('turns on a set of lights', () => {
+      const LightON = jest.fn().mockImplementation(() => ({
+        state: 'ON',
+        turnON: jest.fn(),
+        turnOFF: jest.fn(),
+      }));
       const lightsGrid = new LightsGrid(Light);
 
       expect(lightsGrid.grid.toString()).toEqual(initialGrid.toString());
@@ -44,6 +43,34 @@ describe('LightsGrid', () => {
         [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()],
         [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()]
       ].toString());
+    });
+
+    it('turns 1 light on', () => {
+      // Light.mockImplementation(() => ({
+      //   state: 'OFF',
+      //   turnON: jest.fn(() => this.state = 'ON'),
+      //   turnOFF: jest.fn(() => this.state = 'OFF'),
+      // }));
+      const LightON = jest.fn().mockImplementation(() => ({
+        state: 'ON',
+        turnON: jest.fn(),
+        turnOFF: jest.fn(),
+      }));
+      const lightsGrid = new LightsGrid(Light);
+
+      expect(lightsGrid.grid.toString()).toEqual(initialGrid.toString());
+
+      lightsGrid.turnONLights(0, 0, 0, 0);
+
+      // console.log('THIS.GRID: ', lightsGrid.grid);
+
+      expect(lightsGrid.grid).toEqual([
+        [new LightON(), new Light(), new Light(), new Light(), new Light()],
+        [new Light(), new Light(), new Light(), new Light(), new Light()],
+        [new Light(), new Light(), new Light(), new Light(), new Light()],
+        [new Light(), new Light(), new Light(), new Light(), new Light()],
+        [new Light(), new Light(), new Light(), new Light(), new Light()]
+      ]);
     });
   });
 });
