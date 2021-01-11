@@ -1,9 +1,11 @@
-const { LightsGrid } = require('../lib/lightsGrid');
+const LightsGrid  = require('../lib/lightsGrid');
 const Light = require('../lib/light');
 
-jest.mock('../lib/light');
-
 describe('LightsGrid', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('is defined', () => {
     expect(LightsGrid).toBeDefined();
   });
@@ -16,61 +18,20 @@ describe('LightsGrid', () => {
   });
 
   describe('#turnONLights', () => {
-    const initialGrid = [
-      [new Light(), new Light(), new Light(), new Light(), new Light()],
-      [new Light(), new Light(), new Light(), new Light(), new Light()],
-      [new Light(), new Light(), new Light(), new Light(), new Light()],
-      [new Light(), new Light(), new Light(), new Light(), new Light()],
-      [new Light(), new Light(), new Light(), new Light(), new Light()]
-    ];
-    
-    it('turns on a set of lights', () => {
-      const LightON = jest.fn().mockImplementation(() => ({
-        state: 'ON',
-        turnON: jest.fn(),
-        turnOFF: jest.fn(),
-      }));
+    it('turns 1 light ON', () => {
       const lightsGrid = new LightsGrid(Light);
-
-      expect(lightsGrid.grid.toString()).toEqual(initialGrid.toString());
-
-      lightsGrid.turnONLights(0, 0, 5, 5);
-
-      expect(lightsGrid.grid.toString()).toEqual([
-        [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()],
-        [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()],
-        [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()],
-        [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()],
-        [new LightON(), new LightON(), new LightON(), new LightON(), new LightON()]
-      ].toString());
-    });
-
-    it('turns 1 light on', () => {
-      // Light.mockImplementation(() => ({
-      //   state: 'OFF',
-      //   turnON: jest.fn(() => this.state = 'ON'),
-      //   turnOFF: jest.fn(() => this.state = 'OFF'),
-      // }));
-      const LightON = jest.fn().mockImplementation(() => ({
-        state: 'ON',
-        turnON: jest.fn(),
-        turnOFF: jest.fn(),
-      }));
-      const lightsGrid = new LightsGrid(Light);
-
-      expect(lightsGrid.grid.toString()).toEqual(initialGrid.toString());
 
       lightsGrid.turnONLights(0, 0, 0, 0);
 
-      // console.log('THIS.GRID: ', lightsGrid.grid);
-
-      expect(lightsGrid.grid).toEqual([
-        [new LightON(), new Light(), new Light(), new Light(), new Light()],
-        [new Light(), new Light(), new Light(), new Light(), new Light()],
-        [new Light(), new Light(), new Light(), new Light(), new Light()],
-        [new Light(), new Light(), new Light(), new Light(), new Light()],
-        [new Light(), new Light(), new Light(), new Light(), new Light()]
-      ]);
+      for(let i = 0; i < 5; i++) {
+        for(let j = 0; j < 5; j++) {
+          if(i === 0 && j === 0) {
+            expect(lightsGrid.grid[i][j].state).toEqual('ON');
+          } else {
+            expect(lightsGrid.grid[i][j].state).toEqual('OFF');
+          }
+        };
+      };
     });
   });
 });
