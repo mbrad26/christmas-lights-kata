@@ -58,9 +58,24 @@ describe('LightsGrid', () => {
 
       for(let i = 0; i < 10; i++) {
         for(let j = 0; j < 10; j++) {
-          if(i === 0 && j === 0) {
+          if(i === 0 && j <= 0) {
             expect(lightsGrid.grid[i][j].state).toEqual('ON');
-            expect(lightsGrid.grid[i][j+1].state).toEqual('ON');
+            break;
+          };
+          expect(lightsGrid.grid[i][j].state).toEqual('OFF');
+        };
+      };
+    });
+
+    it('turns all lights ON in 2 rows', () => {
+      const lightsGrid = new LightsGrid(Light);
+
+      lightsGrid.turnONLights(0, 0, 1, 10);
+
+      for(let i = 0; i < 10; i++) {
+        for(let j = 0; j < 10; j++) {
+          if(i <= 1 && j < 10) {
+            expect(lightsGrid.grid[i][j].state).toEqual('ON');
             break;
           };
           expect(lightsGrid.grid[i][j].state).toEqual('OFF');
