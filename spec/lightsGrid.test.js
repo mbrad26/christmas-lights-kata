@@ -33,5 +33,22 @@ describe('LightsGrid', () => {
         };
       };
     });
+
+    it('turns 2 lights ON in the same row', () => {
+      const lightsGrid = new LightsGrid(Light);
+
+      lightsGrid.turnONLights(0, 0, 0, 1);
+
+      for(let i = 0; i < 5; i++) {
+        for(let j = 0; j < 5; j++) {
+          if(i === 0 && j === 0) {
+            expect(lightsGrid.grid[i][j].state).toEqual('ON');
+            expect(lightsGrid.grid[i][j+1].state).toEqual('ON');
+            break;
+          };
+          expect(lightsGrid.grid[i][j].state).toEqual('OFF');
+        };
+      };
+    });
   });
 });
