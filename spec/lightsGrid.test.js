@@ -130,4 +130,15 @@ describe('LightsGrid', () => {
       expect(() => lightsGrid.turnONLights(1, 0, 0, 1)).toThrowError('Starting row can\'t be less than ending row!');
     });
   });
+
+  describe('#turnOFFLights', () => {
+    it('turns off 1 light', () => {
+      const lightsGrid = new LightsGrid(Light);
+
+      lightsGrid.turnONLights(0, 0, 0, 1);
+      lightsGrid.turnOFFLights(0, 0, 0, 1);
+
+      expect(lightsGrid.grid[0][0].state).toEqual('OFF');
+    });
+  });
 });
