@@ -140,5 +140,26 @@ describe('LightsGrid', () => {
 
       expect(lightsGrid.grid[0][0].state).toEqual('OFF');
     });
+
+    it('turns off 2 lights', () => {
+      let count = 0;
+      const lightsGrid = new LightsGrid(Light);
+
+      lightsGrid.turnONLights(0, 0, 0, 2);
+      lightsGrid.turnOFFLights(0, 0, 0, 2);
+      
+      for(let i = 0; i < 10; i++) {
+        for(let j = 0; j < 10; j++) {
+          if(i === 0  && j < 2) {
+            count++;
+            expect(lightsGrid.grid[i][j].state).toEqual('OFF');
+            continue;
+          };
+          expect(lightsGrid.grid[i][j].state).toEqual('OFF');
+        };
+      };
+
+      expect(count).toEqual(2);
+    });
   });
 });
