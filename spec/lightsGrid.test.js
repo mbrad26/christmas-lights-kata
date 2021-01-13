@@ -123,5 +123,11 @@ describe('LightsGrid', () => {
       expect(() => lightsGrid.turnONLights(0, 0, 11, 1)).toThrowError('Out of boundaries!');
       expect(() => lightsGrid.turnONLights(0, 0, 1, 11)).toThrowError('Out of boundaries!');
     });
+
+    it('throws an error when starting row is > ending row ', () => {
+      const lightsGrid = new LightsGrid(Light);
+
+      expect(() => lightsGrid.turnONLights(1, 0, 0, 1)).toThrowError('Starting row can\'t be less than ending row!');
+    });
   });
 });
