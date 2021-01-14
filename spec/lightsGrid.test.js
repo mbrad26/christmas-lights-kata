@@ -224,5 +224,20 @@ describe('LightsGrid', () => {
 
       expect(count).toEqual(13);
     });
+
+    it('throws an error when arguments are out of boundaries', () => {
+      const lightsGrid = new LightsGrid(Light);
+
+      lightsGrid.turnONLights(0, 0, 9, 10);
+
+      expect(() => lightsGrid.turnOFFLights(-1, 0, 1, 1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(0, -1, 1, 1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(1, 0, -1, 1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(1, 0, 1, -1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(11, 0, 1, 1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(0, 11, 1, 1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(0, 0, 11, 1)).toThrowError('Out of boundaries!');
+      expect(() => lightsGrid.turnOFFLights(0, 0, 1, 11)).toThrowError('Out of boundaries!');
+    });
   });
 });
