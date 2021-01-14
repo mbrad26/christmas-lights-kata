@@ -129,6 +129,12 @@ describe('LightsGrid', () => {
 
       expect(() => lightsGrid.turnONLights(1, 0, 0, 1)).toThrowError('Starting row can\'t be less than ending row!');
     });
+
+    it('throws an error when starting in the same row the starting col > ending col', () => {
+      const lightsGrid = new LightsGrid(Light);
+
+      expect(() => lightsGrid.turnONLights(0, 5, 0, 1)).toThrowError('Starting col can\'t be greater than ending col!');
+    });
   });
 
   describe('#turnOFFLights', () => {
