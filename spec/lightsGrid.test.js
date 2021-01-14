@@ -162,7 +162,7 @@ describe('LightsGrid', () => {
       expect(count).toEqual(2);
     });
 
-    it('turns all lights ON in a row', () => {
+    it('turns all lights OFF in a row', () => {
       let count = 0;
       const lightsGrid = new LightsGrid(Light);
 
@@ -181,6 +181,27 @@ describe('LightsGrid', () => {
       };
 
       expect(count).toEqual(10);
+    });
+
+    it('turns all lights OFF in two rows', () => {
+      let count = 0;
+      const lightsGrid = new LightsGrid(Light);
+
+      lightsGrid.turnONLights(0, 0, 9, 10);
+      lightsGrid.turnOFFLights(0, 0, 1, 10);
+
+      for(let i = 0; i < 10; i++) {
+        for(let j = 0; j < 10; j++) {
+          if(i <= 1) {
+            count++
+            expect(lightsGrid.grid[i][j].state).toEqual('OFF');
+            continue;
+          };
+          expect(lightsGrid.grid[i][j].state).toEqual('ON');
+        };
+      };
+
+      expect(count).toEqual(20);
     });
   });
 });
